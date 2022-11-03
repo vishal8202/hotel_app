@@ -1,3 +1,5 @@
+
+
 import mysql.connector
 from tabulate import tabulate
 import sys
@@ -104,4 +106,4 @@ while(True):
         except mysql.connector.Error as e:
             sys.exit("error occured sum between 2 days code")
     elif(ch==10):
-        break
+    break
