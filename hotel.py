@@ -1,9 +1,15 @@
 import mysql.connector
+
 import sys
 try:
     mydb = mysql.connector.connect(host = 'localhost' , user = 'root' , password = '' , database = 'hoteldb')
 except mysql.connector.Error as e:
         sys.exit("connection error occured!")
+=======
+
+mydb = mysql.connector.connect(host = 'localhost' , user = 'root' , password = '' , database = 'hoteldb')
+
+
 mycursor = mydb.cursor()
 li =[]
 while(True):
@@ -14,10 +20,14 @@ while(True):
     print("4 Sandwich  :   50")
     print("5 lime      :   25")
     print("6 Generate Bill")
+
     print("7 view all by date")
     print("8 sum by date")
     print("9 summary inbetween two dates")
     print("10 Exit")
+=======
+    print("7 Exit")
+
     ch=int(input("Enter the choice : "))
     
     if(ch==1):
@@ -51,7 +61,8 @@ while(True):
         name = input('Enter the name : ')
         phone = input('Enter the phone number : ')
         #dates = input('Enter the date in the form of yyyy-mm-d : ')
-    
+
+
 
         count = 0
         for i in li:
@@ -102,4 +113,19 @@ while(True):
         except mysql.connector.Error as e:
             sys.exit("error occured in view code")
     elif(ch==10):
+=======
+        
+        count = 0
+        for i in li:
+           count = count + i
+
+        amount = count
+        print(total)
+        sql = "INSERT INTO `bills`(`name`, `phone`, `amount`, `date`) VALUES (%s,%s,%s,now())"
+        data = (name,phone,amount)
+        mycursor.execute(sql,data)
+        mydb.commit()
+        print('Thank you!!!')
+    elif(ch==7):
+
         break
